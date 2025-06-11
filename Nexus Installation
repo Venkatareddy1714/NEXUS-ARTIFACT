@@ -1,0 +1,11 @@
+ wget https://download.sonatype.com/nexus/3/nexus-3.81.0-08-linux-x86_64.tar.gz
+ ls
+ tar -xvf nexus-3.81.0-08-linux-x86_64.tar.gz
+ yum install java-17-amazon-corretto -y
+ sudo useradd nexus
+ chown -R  nexus:nexus  nexus-3.81.0-08
+ sudo sh nexus-3.81.0-08/bin/nexus start
+ cat /root/sonatype-work/nexus3/admin.password
+
+
+ #/browse with <IP>:8081?#
