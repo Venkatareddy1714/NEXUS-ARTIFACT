@@ -1,0 +1,33 @@
+pipeline {
+    agent any
+    tools {
+        maven 'maven-3.8.8'  // Replace with the name you configured in Jenkins
+    }
+    stages {
+        stage('checkout') {
+            steps {
+                git 'https://github.com/Venkatareddy1714/jenkins-java-project123.git'
+            }
+        }
+        stage('build') {
+            steps {
+                sh 'mvn compile'
+            }
+        }
+        stage('test') {
+            steps {
+                sh 'mvn test'
+            }
+        }
+        stage('artifact') {
+            steps {
+                sh 'mvn package'
+            }
+        }
+        stage('Artifact upload') {
+            steps {
+                nexusArtifactUploader artifacts: [[artifactId: 'NETFLIX', classifier: '', file: 'target/NETFLIX-1.2.2.war', type: '.war']], credentialsId: 'nexus-creds', groupId: 'in.VENKAT', nexusUrl: '43.204.217.236:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'maven', version: '1.2.2'
+            }
+        }
+    }
+}
